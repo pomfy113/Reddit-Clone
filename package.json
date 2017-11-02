@@ -4,7 +4,7 @@
   "description": "Clone of reddit for educational purposes.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "test": "mocha --timeout 10000"
   },
   "author": "",
   "license": "ISC",
@@ -14,5 +14,10 @@
     "express.js": "^1.0.0",
     "handlebars": "^4.0.11",
     "mongoose": "^4.12.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
   }
 }

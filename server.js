@@ -14,13 +14,21 @@ app.set('view engine', 'handlebars');
 // // mongo
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/reddit-clone');
 
+// Model
+var Post = require('./models/post');
+
 // Controller
 // // Posts
 require('./controllers/posts.js')(app);
-// Model
 
 app.get('/', function(req, res){
-    res.render('home', {})
+    Post.find().then((posts)=>{
+        // Returns ALL the posts
+        res.render('posts-index', { posts })
+    }).catch((err)=>{
+        console.log(err.message, "Could not get index page!")
+    })
+
 })
 
 app.get('/posts/new', function(req, res){
