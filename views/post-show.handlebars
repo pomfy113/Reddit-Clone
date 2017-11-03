@@ -4,3 +4,20 @@
     <p>{{post.summary}}</p>
   </div>
 </div>
+
+<form method="POST" action="/posts/{{post._id}}/comments">
+    <div class="form-group">
+      <label for="Comment">Comment</label>
+      <textarea name="content" class="form-control" id="comment-content" placeholder="Comment"></textarea>
+    </div>
+
+  <div class="text-right">
+    <button type="submit">Save</button>
+  </div>
+</form>
+
+{{#each post.comments}}
+<li class="list-group-item">
+    <p>{{this.content}}</p>
+</li>
+{{/each}}

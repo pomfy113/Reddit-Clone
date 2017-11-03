@@ -1,0 +1,13 @@
+It's a subreddit!
+
+{{#each post}}
+    <li class="list-group-item">
+      <a href="/posts/{{this._id}}" class="lead">{{this.title}}</a><br>
+      <a href="{{this.url}}" target="_blank">{{this.url}}<a>
+      <div class="text-right">
+        <a href="/n/{{this.subreddit}}">{{this.subreddit}}<a>
+      </div>
+
+    </li>
+
+{{/each}}

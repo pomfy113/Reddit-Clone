@@ -17,9 +17,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/reddit-clone');
 // Model
 var Post = require('./models/post');
 
-// Controller
-// // Posts
-require('./controllers/posts.js')(app);
 
 app.get('/', function(req, res){
     Post.find().then((posts)=>{
@@ -34,6 +31,13 @@ app.get('/', function(req, res){
 app.get('/posts/new', function(req, res){
     res.render('posts-new', {})
 })
+
+// Controller
+// // Posts
+require('./controllers/posts.js')(app);
+require('./controllers/comments.js')(app);
+
+
 
 app.listen(3000, function () {
   console.log('App listening on port 3000')
