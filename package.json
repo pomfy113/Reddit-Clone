@@ -12,6 +12,7 @@
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
     "express-handlebars": "^3.0.0",
     "express.js": "^1.0.0",
     "handlebars": "^4.0.11",

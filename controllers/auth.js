@@ -2,7 +2,7 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 
-module.exports = function(app) {
+module.exports = (app) => {
 
 // SIGN UP POST
     app.get('/sign-up', function(req, res, next) {
