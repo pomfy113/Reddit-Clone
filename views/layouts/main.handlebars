@@ -12,20 +12,25 @@
         <li><a class="nav-link" href="/posts/new">New Post</a></li>
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline" style="padding:0px 10px;">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 
-    <ul class="navbar-nav navbar-right">
       {{#if currentUser}}
-      <li>Welcome {{username}}!</li>
-      <li><a class="nav-link" href="/logout">Log-out</a></li>
+      <span class="navbar-text" style="padding:0px 10px">Logged in:<br>{{currentUser.username}}</span>
+
+      <ul class="navbar-nav navbar-right">
+          <li><a class="nav-item nav-link" href="/logout">Log-out</a></li>
+      </ul>
+
+
       {{else}}
+      <ul class="navbar-nav navbar-right">
       <li><a class="nav-link" href="/login">Login</a></li>
       <li><a class="nav-link" href="/sign-up">Sign Up</a></li>
+        </ul>
       {{/if}}
-    </ul>
 
   </div>
 </nav>

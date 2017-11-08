@@ -1,14 +1,10 @@
-This is the home page!
 
-{{#each posts}}
+{{#each post}}
 <li class="list-group-item">
   <a href="/posts/{{this._id}}" class="lead">{{this.title}}</a>
   <a href="{{this.url}}">{{this.url}}<a><br>
-  <a href="/users/{{this.author.username}}">By: {{this.author.username}}<a><br>
   <div class="text-right">
     <a href="/n/{{this.subreddit}}">{{this.subreddit}}<a>
   </div>
-
 </li>
-
 {{/each}}

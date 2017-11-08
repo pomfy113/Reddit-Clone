@@ -7,7 +7,6 @@ var mongoose = require('mongoose')
 var cookieParser = require('cookie-parser')
 var jwt = require('jsonwebtoken');
 
-
 // Middleware
 // // Body Parser, method override
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,11 +34,7 @@ var checkAuth = function (req, res, next) {
   next()
 }
 
-// Controller
-// // Posts
-require('./controllers/posts.js')(app);
-require('./controllers/comments.js')(app);
-require('./controllers/auth.js')(app);
+
 
 app.use(checkAuth)
 
@@ -52,41 +47,37 @@ var User = require('./models/user');
 
 app.get('/', function(req, res){
     var currentUser = req.user;
-    console.log(currentUser)
-
     // var username = User.findById(req.user._id).then((user) =>{
     //     newthing = user.username
     //     console.log(newthing)
     //     return(newthing)
     // })
-    if(currentUser == null){
-        console.log("No user available!")
-        Post.find().then((posts)=>{
+        Post.find().populate('author').then((posts)=>{
         // Returns ALL the posts
         res.render('posts-index', { posts, currentUser });
         }).catch((err)=>{
             console.log(err.message, "Could not get index page!")
         })
         console.log(req.cookies);
-    }
-    else{
-        console.log("User is logged in!")
-        User.findById(req.user._id).then((user) =>{
-            let username = user.username
-            Post.find().then((posts)=>{
-            // Returns ALL the posts
-            res.render('posts-index', { posts, currentUser, username });
-            }).catch((err)=>{
-                console.log(err.message, "Could not get index page!")
-            })
-            console.log(req.cookies);
-        })
-    }
+    // else{
+    //     console.log("User is logged in!")
+    //     User.findById(req.user._id).then((user) =>{
+    //         let username = user.username
+    //         Post.find().then((posts)=>{
+    //         // Returns ALL the posts
+    //         res.render('posts-index', { posts, currentUser, username });
+    //         }).catch((err)=>{
+    //             console.log(err.message, "Could not get index page!")
+    //         })
+    //         console.log(req.cookies);
+    //     })
+    // }
 })
 
 // New post
 app.get('/posts/new', function(req, res){
-    res.render('posts-new', {})
+    var currentUser = req.user;
+    res.render('posts-new', {currentUser})
 })
 
 // LOGOUT
@@ -96,6 +87,14 @@ app.get('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
+// Controller
+// // Posts
+require('./controllers/posts.js')(app);
+require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
+
 app.listen(3000, function () {
   console.log('App listening on port 3000')
 })
+
+module.exports = app

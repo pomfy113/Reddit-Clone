@@ -6,22 +6,21 @@ module.exports = function(app) {
       app.post('/posts/:postId/comments', function (req, res) {
         // INSTANTIATE INSTANCE OF MODEL
         var comment = new Comment(req.body);
-        console.log("Creating:", comment)
         // SAVE INSTANCE OF POST MODEL TO DB
 
         Post.findById(req.params.postId).then((post)=>{
-            comment.save().then((comment) => {
-                post.comments.unshift(comment)
-                post.save()
-                console.log("\n\nPost:", post)
-            })
-        }).then(()=>{
-            console.log("Success!")
+            // findById resolved
+            post.comments.unshift(comment)
+            return post.save()
+        }).then((post) => {
+            // post.save resolved
+            return comment.save()
+        }).then((comment) => {
+            // comment.save resolved
             res.redirect('/posts/' + req.params.postId)
         }).catch((err)=>{
             console.log(err.message, "Could not save comment!")
             res.redirect('/posts/' + req.params.postId)
-
         })
 
         //

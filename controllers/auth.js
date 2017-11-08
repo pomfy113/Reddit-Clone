@@ -1,8 +1,10 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
+// For testing
 
 module.exports = (app) => {
+
 
 // SIGN UP POST
     app.get('/sign-up', function(req, res, next) {
@@ -13,12 +15,13 @@ module.exports = (app) => {
     app.post('/sign-up', function(req, res, next) {
       // Create User and JWT
       var user = new User(req.body);
-      console.log(user);
+      console.log("Username:", user, "\n\n");
+      console.log("Body:", req.body)
 
       user.save(function (err) {
         if (err) { return res.status(400).send({ err: err }) }
 
-        var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
+        var token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, { expiresIn: "60 days" });
         res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
         res.redirect('/');
       })
@@ -46,8 +49,7 @@ module.exports = (app) => {
           if (!isMatch) {
             return res.status(401).send({ message: 'Wrong email or password' });
           }
-
-          var token = jwt.sign({ _id: user._id }, process.env.SECRET, { expiresIn: "60 days" });
+          var token = jwt.sign({ _id: user._id, username: user.username }, process.env.SECRET, { expiresIn: "60 days" });
           res.cookie('nToken', token, { maxAge: 900000, httpOnly: true });
 
           res.redirect('/');

@@ -15,10 +15,10 @@ const CartObjects = require('./cart');
 // console.log(cart);
 
 
-it('Should create a new item with name and price');
-    var cart = new CartObjects.Cart()
-    cart['inside'].push(apple)
-    console.log(cart.size)
+// it('Should create a new item with name and price');
+//     var cart = new CartObjects.Cart()
+//     cart['inside'].push(apple)
+//     console.log(cart.size)
 // it('Should return an array containing all items in cart');
 // it('Should add a new item to the shopping cart');
 // it('Should return the number of items in the cart');
