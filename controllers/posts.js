@@ -45,10 +45,8 @@ module.exports = function(app) {
     })
 
     app.get('/n/:subreddit', function(req, res) {
-        var currentUser = req.user;
-
         Post.find({subreddit: req.params.subreddit }).then((post) => {
-            res.render('subreddit', { post, currentUser})
+            res.render('subreddit', { post })
         }).catch((err) => {
             console.log(err.message, "Could not find subreddit!")
         })
