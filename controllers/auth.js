@@ -39,6 +39,11 @@ module.exports = (app) => {
       res.render('login');
     });
 
+    app.get('/login/:msg', function(req, res, next) {
+      res.render('login', {msg : req.params.msg});
+    });
+
+
     // Actual log-in
 
     // LOGIN

@@ -20,5 +20,12 @@
 {{#each post.comments}}
 <li class="list-group-item">
     <p>{{this.content}}</p>
+    {{#if this.comments}}
+        {{#each this.comments}}
+        Below are comments of comments!
+        <p><t>{{this.content}}</p>
+        {{/each}}
+    {{/if}}
+    <a href="/comments/{{this._id}}/new">Comment</a>
 </li>
 {{/each}}

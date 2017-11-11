@@ -1,9 +1,11 @@
 <!-- For new posts -->
 <div class="row">
     <div class="col-sm-4"></div>
-
   <div class="col-sm-4">
     <form method="POST" action="/login">
+        {{#if msg}}
+            <p>Please log in to post!</p>
+        {{/if}}
       <legend>Log-In</legend>
       <div class="form-group">
         <label for="username">Username</em></label>

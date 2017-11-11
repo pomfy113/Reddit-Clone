@@ -6,6 +6,13 @@ module.exports = function(app) {
 
     // CREATE
     app.post('/posts', function (req, res) {
+
+        // If not logged in, do this
+        if (req.user == null) {
+            res.redirect('/login/error');
+            return
+        }
+
         // INSTANTIATE INSTANCE OF POST MODEL
         var post = new Post(req.body);
 
@@ -36,7 +43,10 @@ module.exports = function(app) {
         // Look up post, then render; if it doesn't work, error msg
         var currentUser = req.user;
 
-        Post.findById(req.params.id).populate('comments').populate('author')
+        Post.findById(req.params.id).populate({
+            path: 'comments',
+            populate: { path: 'comments'}
+        }).populate('author')
         .then((post) => {
             res.render('post-show', { post, currentUser })
         }).catch((err) => {
