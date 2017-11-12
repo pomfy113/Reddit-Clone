@@ -38,6 +38,8 @@ module.exports = function(app) {
 
         })
     })
+
+    // Comments for comments!
     app.post('/comments/:commentid', function (req, res) {
         // INSTANTIATE INSTANCE OF MODEL
         var comment = new Comment(req.body);

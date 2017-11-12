@@ -7,4 +7,15 @@ var CommentSchema = new Schema({
 
 });
 
+var autoPopulateComments = function(next) {
+  this.populate('comments');
+  next();
+};
+
+CommentSchema.
+  pre('find', autoPopulateComments).
+  pre('findOne', autoPopulateComments);
+
+
+
 module.exports = mongoose.model('Comment', CommentSchema);

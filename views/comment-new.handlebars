@@ -3,6 +3,11 @@ This is a new comment!
 
 {{comment.content}}
 </li>
+{{#each comment.comments}}
+<li class="list-group-item">
+{{this.content}}
+</li>
+{{/each}}
 <br>
 <!-- For new posts -->
 <div class="row">

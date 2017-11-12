@@ -43,10 +43,12 @@ module.exports = function(app) {
         // Look up post, then render; if it doesn't work, error msg
         var currentUser = req.user;
 
-        Post.findById(req.params.id).populate({
-            path: 'comments',
-            populate: { path: 'comments'}
-        }).populate('author')
+        Post.findById(req.params.id)
+        // .populate({
+        //     path: 'comments',
+        //     populate: { path: 'comments'}
+        // })
+        // .populate('author')
         .then((post) => {
             res.render('post-show', { post, currentUser })
         }).catch((err) => {

@@ -11,4 +11,13 @@ var PostSchema = new Schema({
   , comments       : [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
 
+var autoPopulatePosts = function(next) {
+  this.populate('comments').populate('author');
+  next();
+};
+
+PostSchema.
+  pre('find', autoPopulatePosts).
+  pre('findOne', autoPopulatePosts);
+
 module.exports = mongoose.model('Post', PostSchema);
