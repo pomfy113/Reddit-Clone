@@ -76,4 +76,44 @@ module.exports = function(app) {
         })
 
     })
+
+    app.put('/posts/:id/vote-up', function (req, res) {
+        Post.findById(req.params.id).exec(function (err, post) {
+            if(req.user === null){
+                console.log("You must be logged in!")
+            }
+            else if(post.upVotes.includes(req.user._id)){
+                console.log(post.upVotes)
+                console.log("You already voted on this post")
+                console.log(req.user._id)
+                res.status(200);
+            }
+            else{
+                post.upVotes.push(req.user._id)
+                post.voteScore = post.voteScore + 1
+                post.save();
+                res.status(200);
+            }
+        })
+    })
+
+    app.put('/posts/:id/vote-down', function (req, res) {
+        Post.findById(req.params.id).exec(function (err, post) {
+            if(req.user === null){
+                console.log("You must be logged in!")
+            }
+            else if(post.downVotes.includes(req.user._id)){
+                console.log(post.downVotes)
+                console.log(req.user._id)
+                console.log("You already voted on this post")
+            }
+            else{
+                post.downVotes.push(req.user._id)
+                post.voteScore = post.voteScore - 1
+                post.save();
+                console.log(post, req.user)
+                res.status(200);
+            }
+        })
+    })
 }

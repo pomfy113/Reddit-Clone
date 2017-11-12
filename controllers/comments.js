@@ -31,7 +31,7 @@ module.exports = function(app) {
         })
     })
 
-
+    // New comments
     app.get('/comments/:commentid/new', function(req,res){
         Comment.findById(req.params.commentid).then((comment)=>{
             res.render('comment-new', {comment});

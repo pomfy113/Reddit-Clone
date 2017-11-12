@@ -1,8 +1,22 @@
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
-    <a href="{{post.url}}" class="lead">{{post.title}}</a><br>
-    Posted by: {{post.author.username}}
-    <p>{{post.summary}}</p>
+      <li class="list-group-item">
+        <div class="lead">{{post.title}}</div>
+        <a href="{{post.url}}" target="_blank">{{post.url}}<a>
+        <div class="text-right">
+          <a href="/n/{{post.subreddit}}">{{post.subreddit}}<a>
+        </div>
+
+        <form class="vote-up" data-id="{{post._id}}">
+          <button type="submit">Vote Up</button>
+        </form>
+        |
+        <form class="vote-down" data-id="{{post._id}}">
+          <button type="submit">Vote Down</button>
+        </form>
+        <div class="post-score">{{post.voteScore}}</div>
+      </li>
+
   </div>
 </div>
 
