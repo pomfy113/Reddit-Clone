@@ -2,7 +2,6 @@ $(document).ready(function() {
 
   $('.vote-up').submit(function (e) {
     e.preventDefault();
-    console.log("Voting up!")
     var postId = $(this).data('id');
     $.ajax({
       type: 'PUT',
@@ -14,8 +13,7 @@ $(document).ready(function() {
         console.log(err.messsage);
       }
     });
-    $('post-score').html();
-
+    $('#post-score').load(location.href + " #post-score");
   });
 
   $('.vote-down').submit(function (e) {
@@ -31,7 +29,7 @@ $(document).ready(function() {
         console.log(err.messsage);
       }
     });
-    $('post-score').html();
+    $('#post-score').load(location.href + " #post-score");
   });
 
 });
