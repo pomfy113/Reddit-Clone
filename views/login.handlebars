@@ -4,7 +4,7 @@
   <div class="col-sm-4">
     <form method="POST" action="/login">
         {{#if msg}}
-            <p>Please log in to post!</p>
+            <p>Error:{{msg}}, please log in to post!</p>
         {{/if}}
       <legend>Log-In</legend>
       <div class="form-group">
