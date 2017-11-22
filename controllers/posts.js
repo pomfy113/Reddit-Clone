@@ -31,7 +31,7 @@ module.exports = function(app) {
         let currentUser = req.user;
         res.render('posts-new', { currentUser })
     })
-    
+
     // Getting individual posts
     app.get('/posts/:id', function (req, res) {
         // Look up post, then render; if it doesn't work, error msg
@@ -58,7 +58,8 @@ module.exports = function(app) {
     // Grab posts by user
     app.get('/users/:username', function(req, res){
         // Find user by ID, then return all posts by that author
-        User.findOne({username: req.params.username}).then((username) => {
+        User.findOne({username: req.params.username})
+        .then((username) => {
             return Post.find({ author: username._id })
         }).then((post) => {
             return res.render('user-posts', {post})

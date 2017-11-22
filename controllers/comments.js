@@ -12,7 +12,8 @@ module.exports = function(app) {
         // New comment for post
         let comment = new Comment(req.body);
         // Find the original post to put new comment on
-        Post.findById(req.params.postId).then((post)=>{
+        Post.findById(req.params.postId)
+        .then((post) => {
             // Shift comments to post and save post
             post.comments.unshift(comment)
             return post.save()
@@ -21,7 +22,7 @@ module.exports = function(app) {
             return comment.save()
         }).then((comment) => {
             res.redirect('/posts/' + req.params.postId)
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err.message, "Could not save comment!")
             res.send(err.message)
         })
@@ -30,7 +31,8 @@ module.exports = function(app) {
     // New comments
     app.get('/comments/:commentid/new', (req, res) => {
         // Get the original comment for viewing as well
-        Comment.findById(req.params.commentid).then((comment)=>{
+        Comment.findById(req.params.commentid)
+        .then((comment) => {
             res.render('comment-new', {comment});
         })
     })
@@ -45,7 +47,8 @@ module.exports = function(app) {
         // New comment (for comment)
         let comment = new Comment(req.body);
         // Find original comment to put new comment on
-        Comment.findById(req.params.commentid).then((origcomment)=>{
+        Comment.findById(req.params.commentid)
+        .then((origcomment) => {
             // add a new comment on original comment and save
             origcomment.comments.unshift(comment)
             return origcomment.save()
@@ -54,7 +57,7 @@ module.exports = function(app) {
             return comment.save()
         }).then((origcomment) => {
             res.redirect('/')
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err.message, "Could not save comment!")
             res.send(err.message)
         })

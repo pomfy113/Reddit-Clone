@@ -1,21 +1,21 @@
-var mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-
-var PostSchema = new Schema({
-  title             : { type: String, required: true }
-  , url             : { type: String, required: true }
-  , summary         : { type: String, required: true }
-  , subreddit        : { type: String, required: true }
+const PostSchema = new Schema({
+  title            : { type: String, required: true }
+  , url            : { type: String, required: true }
+  , summary        : { type: String, required: true }
+  , subreddit      : { type: String, required: true }
   , author         : { type: Schema.Types.ObjectId, ref: 'User', required: true }
   , comments       : [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-  , upVotes         : []
-  , downVotes       : []
-  , voteScore       : { type: Number, default: 0 }
+  , upVotes        : []
+  , downVotes      : []
+  , voteScore      : { type: Number, default: 0 }
 
 });
 
-var autoPopulatePosts = function(next) {
+// Autopopulation
+const autoPopulatePosts = function(next) {
   this.populate('comments').populate('author');
   next();
 };

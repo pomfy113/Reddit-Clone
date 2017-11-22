@@ -1,11 +1,12 @@
 require('dotenv').config()
 const express = require('express');
-const app = express();
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
+
+const app = express();
 
 // Middleware
 // // Body Parser, method override

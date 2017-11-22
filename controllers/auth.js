@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 module.exports = (app) => {
     // Sign up page
     app.get('/sign-up', (req, res) => {
-            // Render the sign-up page, else error
-            res.render('sign-up', {})
+        // Render the sign-up page, else error
+        res.render('sign-up', {})
     })
 
     // Post for the sign-up
